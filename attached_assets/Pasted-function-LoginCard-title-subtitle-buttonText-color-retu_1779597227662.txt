@@ -1,0 +1,169 @@
+function LoginCard({ title, subtitle, buttonText, color }) { return ( <div className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-md"> <h2 className="text-3xl font-bold text-center">{title}</h2> <p className="text-gray-500 text-center mt-2">{subtitle}</p>
+
+<div className="mt-6 space-y-4">
+    <input
+      type="email"
+      placeholder="Email Address"
+      className="w-full border p-3 rounded-xl"
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      className="w-full border p-3 rounded-xl"
+    />
+
+    <button
+      className={`w-full py-3 rounded-2xl text-white font-semibold ${color}`}
+    >
+      {buttonText}
+    </button>
+  </div>
+
+  <p className="text-center text-sm text-gray-500 mt-4">
+    Forgot Password?
+  </p>
+</div>
+
+); }
+
+export default function JobPlatformSample() { return ( <div className="min-h-screen bg-gray-100 p-6"> {/* Navbar */} <nav className="bg-white shadow-md rounded-2xl p-4 flex justify-between items-center"> <h1 className="text-2xl font-bold text-blue-700">HireBridge</h1> <div className="flex gap-3"> <button className="bg-blue-600 text-white px-4 py-2 rounded-xl">Candidate Login</button> <button className="bg-black text-white px-4 py-2 rounded-xl">Company Login</button> </div> </nav>
+
+{/* Hero Section */}
+  <section className="mt-8 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-3xl p-10 shadow-lg">
+    <h2 className="text-4xl font-bold">Verified IT & Non-IT Hiring Platform</h2>
+    <p className="mt-4 text-lg text-gray-200 max-w-2xl">
+      Upload your details, generate professional resumes automatically, and connect with trusted companies.
+    </p>
+
+    <div className="mt-6 flex gap-4">
+      <button className="bg-white text-blue-700 font-semibold px-6 py-3 rounded-2xl shadow-md">
+        Create Resume
+      </button>
+      <button className="bg-black text-white font-semibold px-6 py-3 rounded-2xl shadow-md">
+        Hire Candidates
+      </button>
+    </div>
+  </section>
+
+  {/* Features */}
+  <section className="grid md:grid-cols-3 gap-6 mt-10">
+    <div className="bg-white rounded-2xl p-6 shadow-md">
+      <h3 className="text-xl font-bold">Auto Resume Builder</h3>
+      <p className="text-gray-600 mt-3">
+        Candidates fill a smart form and the platform automatically generates a professional resume.
+      </p>
+    </div>
+
+    <div className="bg-white rounded-2xl p-6 shadow-md">
+      <h3 className="text-xl font-bold">Verified Companies</h3>
+      <p className="text-gray-600 mt-3">
+        Every company is manually approved by admin for safer hiring.
+      </p>
+    </div>
+
+    <div className="bg-white rounded-2xl p-6 shadow-md">
+      <h3 className="text-xl font-bold">Subscription System</h3>
+      <p className="text-gray-600 mt-3">
+        Monthly plans using Razorpay for both candidates and companies.
+      </p>
+    </div>
+  </section>
+
+  {/* Resume Form Preview */}
+  <section className="mt-12 bg-white rounded-3xl p-8 shadow-lg">
+    <h2 className="text-3xl font-bold mb-6">Candidate Resume Form</h2>
+
+    <div className="grid md:grid-cols-2 gap-6">
+      <input className="border p-3 rounded-xl" placeholder="Full Name" />
+      <input className="border p-3 rounded-xl" placeholder="Mobile Number" />
+      <input className="border p-3 rounded-xl" placeholder="Email Address" />
+      <input className="border p-3 rounded-xl" placeholder="Location" />
+      <input className="border p-3 rounded-xl" placeholder="Qualification" />
+      <input className="border p-3 rounded-xl" placeholder="Skills (React, Java, Python...)" />
+    </div>
+
+    <div className="mt-6">
+      <textarea
+        className="border p-3 rounded-xl w-full h-32"
+        placeholder="Career Objective / About Yourself"
+      />
+    </div>
+
+    <div className="grid md:grid-cols-2 gap-6 mt-6">
+      <div>
+        <label className="block font-medium mb-2">Upload Photo</label>
+        <input type="file" className="border p-3 rounded-xl w-full" />
+      </div>
+
+      <div>
+        <label className="block font-medium mb-2">Upload Signature</label>
+        <input type="file" className="border p-3 rounded-xl w-full" />
+      </div>
+    </div>
+
+    <button className="mt-8 bg-blue-600 text-white px-8 py-3 rounded-2xl font-semibold shadow-md">
+      Submit & Generate Resume
+    </button>
+  </section>
+
+  {/* Company Section */}
+  <section className="mt-12 grid md:grid-cols-2 gap-6">
+    <div className="bg-white rounded-2xl p-6 shadow-md">
+      <h3 className="text-2xl font-bold">For Companies</h3>
+      <ul className="mt-4 space-y-2 text-gray-700">
+        <li>✔ Search candidates by skills</li>
+        <li>✔ Download generated resumes</li>
+        <li>✔ Contact verified candidates</li>
+        <li>✔ Subscription access with Razorpay</li>
+      </ul>
+    </div>
+
+    <div className="bg-white rounded-2xl p-6 shadow-md">
+      <h3 className="text-2xl font-bold">Admin Dashboard</h3>
+      <ul className="mt-4 space-y-2 text-gray-700">
+        <li>✔ Approve candidates</li>
+        <li>✔ Approve companies</li>
+        <li>✔ Manage subscriptions</li>
+        <li>✔ Remove fake profiles</li>
+      </ul>
+    </div>
+  </section>
+
+  {/* Footer */}
+  {/* Login Sections */}
+  <section className="mt-16">
+    <h2 className="text-4xl font-bold text-center mb-10">
+      Platform Login Panels
+    </h2>
+
+    <div className="grid md:grid-cols-3 gap-8">
+      <LoginCard
+        title="Candidate Login"
+        subtitle="Access your resume dashboard"
+        buttonText="Login as Candidate"
+        color="bg-blue-600"
+      />
+
+      <LoginCard
+        title="Company Login"
+        subtitle="Hire verified candidates"
+        buttonText="Login as Company"
+        color="bg-green-600"
+      />
+
+      <LoginCard
+        title="Admin Login"
+        subtitle="Manage platform approvals"
+        buttonText="Login as Admin"
+        color="bg-black"
+      />
+    </div>
+  </section>
+
+  <footer className="mt-12 text-center text-gray-500 pb-6">
+    © 2026 HireBridge • Smart Resume & Hiring Platform
+  </footer>
+</div>
+
+); }
