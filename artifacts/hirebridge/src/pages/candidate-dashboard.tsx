@@ -89,6 +89,7 @@ export default function CandidateDashboardPage() {
       {
         onSuccess: () => {
           setSentIds((prev) => new Set(prev).add(key));
+          queryClient.invalidateQueries({ queryKey: getListApplicationsQueryKey({ candidateId: DEMO_CANDIDATE_ID }) });
           queryClient.invalidateQueries({ queryKey: getListApplicationsQueryKey() });
           toast({ title: "Request sent!", description: `Your application to ${label} has been submitted.` });
         },

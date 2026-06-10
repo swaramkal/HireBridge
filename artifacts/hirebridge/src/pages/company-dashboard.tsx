@@ -229,9 +229,14 @@ export default function CompanyDashboardPage() {
   const [invitingId, setInvitingId] = useState<number | null>(null);
   const [invitedIds, setInvitedIds] = useState<Set<number>>(new Set());
 
+  const DEMO_COMPANY_NAME = "TechNova Solutions";
+
   const { data: allCandidates, isLoading: candidatesLoading } = useListCandidates();
   const { data: jobs, isLoading: jobsLoading } = useListJobs({ companyId: 1 });
-  const { data: incomingRequests, isLoading: requestsLoading } = useListApplications();
+  const { data: allApplications, isLoading: requestsLoading } = useListApplications();
+  const incomingRequests = (allApplications ?? []).filter(
+    (r) => r.companyName === DEMO_COMPANY_NAME,
+  );
   const createJob = useCreateJob();
   const createApplication = useCreateApplication();
   const updateApplication = useUpdateApplication();
@@ -274,7 +279,9 @@ export default function CompanyDashboardPage() {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: getListApplicationsQueryKey() });
           toast({
-            title: status === "accepted" ? `${candidateName} called for interview!` : `${candidateName}'s request declined`,
+            title: status === "accepted"
+              ? `${candidateName} called for interview!`
+              : `${candidateName}'s request declined`,
           });
         },
       }
