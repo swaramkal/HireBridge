@@ -1,0 +1,38 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "pa9d63p4E6Umn05-O0xsn"
+uri = "file://artifacts/hirebridge/public/images/hero-team.png"
+type = "image"
+title = "hero team photo"
+
+[[generated]]
+id = "-99ds8g5Sdlzf7ZIvtiRc"
+uri = "file://artifacts/hirebridge/public/images/testimonial-1.png"
+type = "image"
+title = "testimonial man 1"
+
+[[generated]]
+id = "W2JIH1w52Y3tNTT1d3_ze"
+uri = "file://artifacts/hirebridge/public/images/testimonial-2.png"
+type = "image"
+title = "testimonial woman 2"
+
+[[generated]]
+id = "-jnfg2mSULEf0wJNSGkQy"
+uri = "file://artifacts/hirebridge/public/images/testimonial-3.png"
+type = "image"
+title = "testimonial engineer 3"
+
+[[generated]]
+id = "TAPc0z5SRavQ3RQEmhVgc"
+uri = "file://artifacts/hirebridge/public/images/feature-resume.png"
+type = "image"
+title = "resume builder illustration"
+
+[[generated]]
+id = "fVQn1ebqUU2WQm_pcRES9"
+uri = "file://artifacts/hirebridge/public/images/cta-candidate.png"
+type = "image"
+title = "candidate working photo"
