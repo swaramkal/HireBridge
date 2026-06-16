@@ -11,8 +11,8 @@ export async function seedIfEmpty(): Promise<void> {
     .insert(candidatesTable)
     .values([
       {
-        fullName: "Arjun Sharma",
-        email: "arjun.sharma@email.com",
+        fullName: "Swaramkal",
+        email: "swaramkal@gmail.com",
         phone: "+91 98765 43210",
         location: "Bangalore, Karnataka",
         qualification: "B.Tech Computer Science",

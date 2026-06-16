@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowRight, CheckCircle2, Shield, FileText, CreditCard, Building2, LayoutDashboard, Menu, X } from "lucide-react";
+import { ArrowRight, CheckCircle2, Shield, FileText, CreditCard, Building2, LayoutDashboard, Menu, X, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useAuth } from "@workspace/replit-auth-web";
 
 function LoginCard({ title, subtitle, buttonText, href, variant }: {
   title: string;
@@ -55,6 +56,7 @@ function LoginCard({ title, subtitle, buttonText, href, variant }: {
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, isLoading, isAuthenticated, login, logout } = useAuth();
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -69,14 +71,33 @@ export default function LandingPage() {
             <Link href="/company/register" className="hover:text-blue-600 transition-colors" data-testid="link-company-register">For Companies</Link>
           </div>
 
-          {/* Desktop buttons */}
-          <div className="hidden md:flex gap-3">
-            <Link href="/candidate/login">
-              <Button variant="outline" size="sm" data-testid="button-candidate-login">Candidate Login</Button>
-            </Link>
-            <Link href="/company/login">
-              <Button size="sm" className="bg-gray-900 hover:bg-gray-800 text-white" data-testid="button-company-login">Company Login</Button>
-            </Link>
+          {/* Desktop auth buttons */}
+          <div className="hidden md:flex gap-3 items-center">
+            {isLoading ? (
+              <div className="w-24 h-8 bg-gray-100 rounded-lg animate-pulse" />
+            ) : isAuthenticated ? (
+              <>
+                <span className="text-sm text-gray-600 font-medium">
+                  {user?.firstName ?? user?.email ?? "Account"}
+                </span>
+                <Button size="sm" variant="outline" onClick={logout} data-testid="button-logout">
+                  <LogOut className="h-3.5 w-3.5 mr-1.5" />
+                  Log out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link href="/candidate/login">
+                  <Button variant="outline" size="sm" data-testid="button-candidate-login">Candidate Login</Button>
+                </Link>
+                <Link href="/company/login">
+                  <Button size="sm" className="bg-gray-900 hover:bg-gray-800 text-white" data-testid="button-company-login">Company Login</Button>
+                </Link>
+                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white" onClick={login} data-testid="button-sign-in">
+                  Sign in
+                </Button>
+              </>
+            )}
           </div>
 
           {/* Mobile hamburger */}
@@ -94,14 +115,26 @@ export default function LandingPage() {
           <div className="md:hidden border-t border-gray-100 bg-white px-4 py-4 space-y-3">
             <Link href="/jobs" className="block text-sm text-gray-700 hover:text-blue-600 py-2" onClick={() => setMobileMenuOpen(false)}>Browse Jobs</Link>
             <Link href="/company/register" className="block text-sm text-gray-700 hover:text-blue-600 py-2" onClick={() => setMobileMenuOpen(false)}>For Companies</Link>
-            <div className="flex gap-2 pt-2">
-              <Link href="/candidate/login" className="flex-1" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="outline" size="sm" className="w-full" data-testid="button-candidate-login-mobile">Candidate Login</Button>
-              </Link>
-              <Link href="/company/login" className="flex-1" onClick={() => setMobileMenuOpen(false)}>
-                <Button size="sm" className="w-full bg-gray-900 hover:bg-gray-800 text-white" data-testid="button-company-login-mobile">Company Login</Button>
-              </Link>
-            </div>
+            {isAuthenticated ? (
+              <div className="pt-2 space-y-2">
+                <p className="text-sm text-gray-500">Signed in as <span className="font-medium text-gray-800">{user?.firstName ?? user?.email}</span></p>
+                <Button size="sm" variant="outline" className="w-full" onClick={logout}>
+                  <LogOut className="h-3.5 w-3.5 mr-1.5" /> Log out
+                </Button>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-2 pt-2">
+                <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={() => { setMobileMenuOpen(false); login(); }}>
+                  Sign in
+                </Button>
+                <Link href="/candidate/login" className="flex-1" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="outline" size="sm" className="w-full" data-testid="button-candidate-login-mobile">Candidate Login</Button>
+                </Link>
+                <Link href="/company/login" className="flex-1" onClick={() => setMobileMenuOpen(false)}>
+                  <Button size="sm" className="w-full bg-gray-900 hover:bg-gray-800 text-white" data-testid="button-company-login-mobile">Company Login</Button>
+                </Link>
+              </div>
+            )}
           </div>
         )}
       </nav>
