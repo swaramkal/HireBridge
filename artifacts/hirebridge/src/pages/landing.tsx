@@ -58,7 +58,7 @@ export default function LandingPage() {
       {/* Navbar */}
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-700 tracking-tight">HireBridge</h1>
+          <h1 className="text-2xl font-bold text-blue-700 tracking-tight">CareerLinks</h1>
           <div className="hidden md:flex items-center gap-6 text-sm text-gray-600">
             <Link href="/jobs" className="hover:text-blue-600 transition-colors" data-testid="link-jobs">Browse Jobs</Link>
             <Link href="/company/register" className="hover:text-blue-600 transition-colors" data-testid="link-company-register">For Companies</Link>
@@ -284,7 +284,7 @@ export default function LandingPage() {
       <footer className="bg-gray-900 text-gray-400 py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div>
-            <span className="text-white font-bold text-xl">HireBridge</span>
+            <span className="text-white font-bold text-xl">CareerLinks</span>
             <p className="text-sm mt-1">Smart Resume &amp; Hiring Platform</p>
           </div>
           <div className="flex gap-6 text-sm">
@@ -293,7 +293,7 @@ export default function LandingPage() {
             <Link href="/company/register" className="hover:text-white transition-colors">For Companies</Link>
             <Link href="/admin/login" className="hover:text-white transition-colors">Admin</Link>
           </div>
-          <p className="text-sm">&copy; 2026 HireBridge. All rights reserved.</p>
+          <p className="text-sm">&copy; 2026 CareerLinks. All rights reserved.</p>
         </div>
       </footer>
     </div>

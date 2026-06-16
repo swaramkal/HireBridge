@@ -29,7 +29,7 @@ export default function CandidateLoginPage() {
         </Link>
 
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-blue-700">HireBridge</h1>
+          <h1 className="text-3xl font-bold text-blue-700">CareerLinks</h1>
           <p className="text-gray-500 mt-1 text-sm">Candidate Portal</p>
         </div>
 

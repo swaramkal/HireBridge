@@ -105,7 +105,7 @@ export default function AdminDashboardPage() {
         <div className="p-6 border-b border-gray-700">
           <div className="flex items-center gap-2">
             <ShieldCheck className="h-5 w-5 text-blue-400" />
-            <h1 className="text-xl font-bold text-white">HireBridge</h1>
+            <h1 className="text-xl font-bold text-white">CareerLinks</h1>
           </div>
           <p className="text-xs text-gray-400 mt-1">Admin Panel</p>
         </div>

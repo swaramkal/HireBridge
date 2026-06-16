@@ -51,7 +51,7 @@ export default function JobsPage() {
       {/* Nav */}
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-blue-700 tracking-tight">HireBridge</Link>
+          <Link href="/" className="text-2xl font-bold text-blue-700 tracking-tight">CareerLinks</Link>
           <div className="flex items-center gap-3">
             <Link href="/candidate/login">
               <Button variant="outline" size="sm">Login</Button>

@@ -318,7 +318,7 @@ export default function CompanyDashboardPage() {
       {/* Sidebar */}
       <aside className="w-64 bg-gray-900 text-white flex-col hidden md:flex flex-shrink-0">
         <div className="p-6 border-b border-gray-700">
-          <h1 className="text-xl font-bold text-blue-400">HireBridge</h1>
+          <h1 className="text-xl font-bold text-blue-400">CareerLinks</h1>
           <p className="text-xs text-gray-400 mt-1">Company Portal</p>
         </div>
 

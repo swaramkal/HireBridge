@@ -32,7 +32,7 @@ export default function AdminLoginPage() {
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-600 mb-4">
             <ShieldCheck className="h-7 w-7 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-white">HireBridge Admin</h1>
+          <h1 className="text-3xl font-bold text-white">CareerLinks Admin</h1>
           <p className="text-gray-400 mt-1 text-sm">Restricted access — authorised personnel only</p>
         </div>
 
@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="admin@hirebridge.com"
+                  placeholder="admin@careerlinks.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="mt-1 bg-gray-700 border-gray-600 text-white placeholder:text-gray-500"
