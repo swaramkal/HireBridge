@@ -1,7 +1,9 @@
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { useRealtime } from "@/hooks/use-realtime";
 import NotFound from "@/pages/not-found";
 import LandingPage from "@/pages/landing";
 import CandidateLoginPage from "@/pages/candidate-login";
@@ -15,6 +17,11 @@ import AdminDashboardPage from "@/pages/admin-dashboard";
 import JobsPage from "@/pages/jobs";
 
 const queryClient = new QueryClient();
+
+function RealtimeBridge() {
+  useRealtime();
+  return null;
+}
 
 function Router() {
   return (
@@ -39,9 +46,11 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          <RealtimeBridge />
           <Router />
         </WouterRouter>
         <Toaster />
+        <SonnerToaster position="bottom-right" richColors closeButton />
       </TooltipProvider>
     </QueryClientProvider>
   );

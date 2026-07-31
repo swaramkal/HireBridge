@@ -12,6 +12,7 @@ import {
   DeleteJobParams,
   ListJobsResponse,
 } from "@workspace/api-zod";
+import { emit } from "../lib/socket";
 
 const router: IRouter = Router();
 
@@ -56,7 +57,10 @@ router.post("/jobs", async (req, res): Promise<void> => {
     .values({ ...parsed.data, companyName })
     .returning();
 
-  res.status(201).json(GetJobResponse.parse({ ...job, createdAt: job.createdAt.toISOString() }));
+  const serialized = { ...job, createdAt: job.createdAt.toISOString() };
+  emit("job:created", serialized);
+
+  res.status(201).json(GetJobResponse.parse(serialized));
 });
 
 router.get("/jobs/:id", async (req, res): Promise<void> => {
@@ -89,7 +93,10 @@ router.patch("/jobs/:id", async (req, res): Promise<void> => {
 
   if (!job) { res.status(404).json({ error: "Job not found" }); return; }
 
-  res.json(UpdateJobResponse.parse({ ...job, createdAt: job.createdAt.toISOString() }));
+  const serialized = { ...job, createdAt: job.createdAt.toISOString() };
+  emit("job:updated", serialized);
+
+  res.json(UpdateJobResponse.parse(serialized));
 });
 
 router.delete("/jobs/:id", async (req, res): Promise<void> => {
@@ -99,6 +106,8 @@ router.delete("/jobs/:id", async (req, res): Promise<void> => {
 
   const [job] = await db.delete(jobsTable).where(eq(jobsTable.id, id)).returning();
   if (!job) { res.status(404).json({ error: "Job not found" }); return; }
+
+  emit("job:deleted", { id });
 
   res.sendStatus(204);
 });

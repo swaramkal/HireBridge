@@ -1,5 +1,5 @@
 import { Router, type IRouter } from "express";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db, candidatesTable } from "@workspace/db";
 import {
   ListCandidatesQueryParams,
@@ -12,6 +12,7 @@ import {
   ListCandidatesResponse,
   GetCandidateStatsResponse,
 } from "@workspace/api-zod";
+import { emit } from "../lib/socket";
 
 const router: IRouter = Router();
 
@@ -26,8 +27,7 @@ router.get("/candidates/stats", async (req, res): Promise<void> => {
 
 router.get("/candidates", async (req, res): Promise<void> => {
   const parsed = ListCandidatesQueryParams.safeParse(req.query);
-  let query = db.select().from(candidatesTable);
-  const rows = await query;
+  const rows = await db.select().from(candidatesTable);
 
   let filtered = rows;
   if (parsed.success && parsed.data.status) {
@@ -55,7 +55,10 @@ router.post("/candidates", async (req, res): Promise<void> => {
     .values({ ...parsed.data, status: "pending" })
     .returning();
 
-  res.status(201).json(GetCandidateResponse.parse({ ...candidate, createdAt: candidate.createdAt.toISOString() }));
+  const serialized = { ...candidate, createdAt: candidate.createdAt.toISOString() };
+  emit("candidate:created", serialized);
+
+  res.status(201).json(GetCandidateResponse.parse(serialized));
 });
 
 router.get("/candidates/:id", async (req, res): Promise<void> => {
@@ -88,7 +91,10 @@ router.patch("/candidates/:id", async (req, res): Promise<void> => {
 
   if (!candidate) { res.status(404).json({ error: "Candidate not found" }); return; }
 
-  res.json(UpdateCandidateResponse.parse({ ...candidate, createdAt: candidate.createdAt.toISOString() }));
+  const serialized = { ...candidate, createdAt: candidate.createdAt.toISOString() };
+  emit("candidate:updated", serialized);
+
+  res.json(UpdateCandidateResponse.parse(serialized));
 });
 
 export default router;

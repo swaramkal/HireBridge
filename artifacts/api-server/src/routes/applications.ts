@@ -9,6 +9,7 @@ import {
   UpdateApplicationResponse,
   ListApplicationsResponse,
 } from "@workspace/api-zod";
+import { emit } from "../lib/socket";
 
 const router: IRouter = Router();
 
@@ -58,7 +59,10 @@ router.post("/applications", async (req, res): Promise<void> => {
     })
     .returning();
 
-  res.status(201).json({ ...application, createdAt: application.createdAt.toISOString() });
+  const serialized = { ...application, createdAt: application.createdAt.toISOString() };
+  emit("application:created", serialized);
+
+  res.status(201).json(serialized);
 });
 
 router.patch("/applications/:id", async (req, res): Promise<void> => {
@@ -80,7 +84,10 @@ router.patch("/applications/:id", async (req, res): Promise<void> => {
 
   if (!application) { res.status(404).json({ error: "Application not found" }); return; }
 
-  res.json(UpdateApplicationResponse.parse({ ...application, createdAt: application.createdAt.toISOString() }));
+  const serialized = { ...application, createdAt: application.createdAt.toISOString() };
+  emit("application:updated", serialized);
+
+  res.json(UpdateApplicationResponse.parse(serialized));
 });
 
 export default router;

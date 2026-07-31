@@ -11,6 +11,7 @@ import {
   UpdateCompanyResponse,
   ListCompaniesResponse,
 } from "@workspace/api-zod";
+import { emit } from "../lib/socket";
 
 const router: IRouter = Router();
 
@@ -40,7 +41,10 @@ router.post("/companies", async (req, res): Promise<void> => {
     .values({ ...parsed.data, status: "pending" })
     .returning();
 
-  res.status(201).json(GetCompanyResponse.parse({ ...company, createdAt: company.createdAt.toISOString() }));
+  const serialized = { ...company, createdAt: company.createdAt.toISOString() };
+  emit("company:created", serialized);
+
+  res.status(201).json(GetCompanyResponse.parse(serialized));
 });
 
 router.get("/companies/:id", async (req, res): Promise<void> => {
@@ -73,7 +77,10 @@ router.patch("/companies/:id", async (req, res): Promise<void> => {
 
   if (!company) { res.status(404).json({ error: "Company not found" }); return; }
 
-  res.json(UpdateCompanyResponse.parse({ ...company, createdAt: company.createdAt.toISOString() }));
+  const serialized = { ...company, createdAt: company.createdAt.toISOString() };
+  emit("company:updated", serialized);
+
+  res.json(UpdateCompanyResponse.parse(serialized));
 });
 
 export default router;
