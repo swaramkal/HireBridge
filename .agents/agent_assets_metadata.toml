@@ -1,5 +1,4 @@
 uploads = []
-outputs = []
 
 [[generated]]
 id = "pa9d63p4E6Umn05-O0xsn"
@@ -36,3 +35,17 @@ id = "fVQn1ebqUU2WQm_pcRES9"
 uri = "file://artifacts/hirebridge/public/images/cta-candidate.png"
 type = "image"
 title = "candidate working photo"
+
+[[outputs]]
+id = "n6rAIbBhSv0t58BOhumHH"
+uri = "file://exports/careerlinks-complete-source.zip"
+type = "unspecified"
+title = "CareerLinks complete source code"
+description = "Complete CareerLinks source package with the responsive frontend, Express API, database schema, Socket.IO real-time features, authentication integration, generated API libraries, assets, and configuration. Dependencies and build caches are excluded; run pnpm install after extracting."
+logical_id = "3a1d733a-d278-4549-8220-148158370718"
+content_hash = "sha256:e74fc99d781c96f263d25861bbb75af89c27a9016daf9da2274bb0d54d31e844"
+size = 8259985
+mtime_ms = 1789622072916
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:dd21b2ff-1a61-40c4-89af-64ebae5ffbf9/3a1d733a-d278-4549-8220-148158370718/0cab76ee-8419-495c-8fcc-8b595a80a578"
+storage_version_token = "1789622080044999"
+content_type = "application/octet-stream"
